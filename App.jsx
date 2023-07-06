@@ -16,8 +16,9 @@ import Homescreen from "./components/Homepage";
 import Details from "./components/Details";
 import Comments from "./components/Comments";
 import Profile from "./components/Profile";
-import {SignUpScreen} from "./components/Signup";
-import {SignInScreen} from "./components/Signin";
+import Edit from "./components/Edit";
+import { SignUpScreen } from "./components/Signup";
+import { SignInScreen } from "./components/Signin";
 import Flow from "./components/Flow";
 import SignInWithOAuth from "./components/SignInWithOAuth";
 
@@ -26,7 +27,7 @@ const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 const CLERK_PUBLISHABLE_KEY =
-  "pk_test_YWxsb3dlZC10ZXJyaWVyLTMwLmNsZXJrLmFjY291bnRzLmRldiQ";
+  "pk_test_YWxlcnQtb2N0b3B1cy0zOS5jbGVyay5hY2NvdW50cy5kZXYk";
 
 function Drawers() {
   return (
@@ -45,7 +46,16 @@ function Tabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Homescreen} />
-      <Tab.Screen name="Profile" component={Profile} options={{headerShown:false}} />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Editor"
+        component={Edit}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 }
@@ -60,7 +70,6 @@ function Stacks() {
       />
       <Stack.Screen name="details" component={Details} />
       <Stack.Screen name="comments" component={Comments} />
-
     </Stack.Navigator>
   );
 }
@@ -76,7 +85,7 @@ export default function App() {
         </PaperProvider>
       </SignedIn>
       <SignedOut>
-        <Flow/>
+        <Flow />
       </SignedOut>
     </ClerkProvider>
   );

@@ -1,20 +1,20 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, ImageBackground } from "react-native";
 import { Chip, PaperProvider } from "react-native-paper";
 import { Avatar, Button, Card } from "react-native-paper";
 import { useState, useEffect } from "react";
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 import { useUser } from "@clerk/clerk-react";
-
-
+import { Feather } from '@expo/vector-icons';
+import { Image } from "expo-image"
 function Profile({ navigation,}) {
 
   const { isSignedIn, user, isLoaded } = useUser();
-  const image = {uri: user.imageUrl};
+  const image = user.profileImageUrl
 
-  console.log(user.emailAddress)
+  // console.log(user.profileIma)
 
   if(!isLoaded){
     return <Text>null at the moment</Text>
@@ -26,14 +26,15 @@ function Profile({ navigation,}) {
         <Text style={styles.headertext}>Profile</Text>
       </View>
       <View style={styles.mainpart}>
-      <View style={styles.circle}>
-      <ImageBackground source={image} resizeMode="cover">
-    </ImageBackground>
-      </View>
+    <Image style={styles.circle} source={image} transition={1000}>
+    </Image>
       <View style={styles.namecont}>
       <Text style={styles.fullname}>{user.fullName}</Text>
-        <Text style={styles.email}>{user.emailAddress}</Text>
+        <Text style={styles.email}>{user.primaryEmailAddress.emailAddress}</Text>
       </View>
+     <TouchableOpacity>
+     <Feather style={styles.edit} name="edit-2" size={30} color="white" />
+     </TouchableOpacity>
       </View>
       </View>
     </View>
@@ -52,14 +53,14 @@ function Profile({ navigation,}) {
     smallcont:{
       height:800,
       width:385,
-      backgroundColor:"white",
+      backgroundColor:"#C4C4C4",
       position:"relative",
       alignItems:"center"
     },
     header:{
       height:120,
       width:375,
-      backgroundColor:"yellow",
+      backgroundColor:"white",
       borderRadius:20,
       top:10,
       display:"flex",
@@ -84,7 +85,6 @@ function Profile({ navigation,}) {
       marginLeft:10,
       borderRadius:100,
       top:10,
-      backgroundColor:"yellow",
       borderWidth:3,
       borderColor:"white"
     },
@@ -102,7 +102,11 @@ function Profile({ navigation,}) {
     headertext:{
       fontSize:20,
       fontWeight:"bold",
-
+    },
+    edit:{
+      display:"flex",
+      top:22,
+      left:240
     }
 
 
