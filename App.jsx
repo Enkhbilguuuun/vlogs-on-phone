@@ -19,6 +19,7 @@ import Profile from "./components/Profile";
 import {SignUpScreen} from "./components/Signup";
 import {SignInScreen} from "./components/Signin";
 import Flow from "./components/Flow";
+import SignInWithOAuth from "./components/SignInWithOAuth";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,7 +45,7 @@ function Tabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Homescreen} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={Profile} options={{headerShown:false}} />
     </Tab.Navigator>
   );
 }

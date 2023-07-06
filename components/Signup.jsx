@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
+import SignInWithOAuth from "./SignInWithOAuth";
 
 
 export function SignUpScreen({onSignInPress}) {
@@ -83,7 +84,7 @@ export function SignUpScreen({onSignInPress}) {
           <TouchableOpacity onPress={onSignUpPress}>
             <Text style={styles.button}>Sign up</Text>
           </TouchableOpacity>
-
+          <SignInWithOAuth/>
           <TouchableOpacity onPress={onSignInPress}>
             <Text style={styles.blue}>if u already have account, Sign in here</Text>
           </TouchableOpacity>
